@@ -12,7 +12,7 @@ Adds a task which runs a check if any of the dependencies has known security vul
 
 1. Run the following commands to install this package as a development dependency:
    ```
-   composer require-dev spekulatius/silverstripe-composer-security-checker
+   composer require spekulatius/silverstripe-composer-security-checker --dev
    ```
 
 2. Login as an administrator
