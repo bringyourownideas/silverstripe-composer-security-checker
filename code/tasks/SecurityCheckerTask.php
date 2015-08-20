@@ -18,7 +18,7 @@ class SecurityCheckerTask extends BuildTask {
 	/**
 	 * @param SS_HTTPRequest $request
 	 */
-	public function run($request) {
+	public function run(SS_HTTPRequest $request) {
 		if (Permission::check('ADMIN') !== true && !$this->isCLI()) {
 			$this->message('Only admins can run this task.');
 		} else {
