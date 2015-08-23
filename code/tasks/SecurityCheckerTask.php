@@ -1,6 +1,6 @@
 <?php
 /**
- * Checks if there are any dependencies to are insecure.
+ * Checks if there are any insecure dependencies.
  */
 use SensioLabs\Security\SecurityChecker;
 
