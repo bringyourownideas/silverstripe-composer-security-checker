@@ -19,43 +19,53 @@ class SecurityCheckerTask extends BuildTask {
 	 * @param SS_HTTPRequest $request
 	 */
 	public function run($request) {
-		if (Permission::check('ADMIN') !== true && !$this->isCLI()) {
-			$this->message('Only admins can run this task.');
-		} else {
-			// use the security checker of
-			$checker = new SecurityChecker();
-			$alerts = $checker->check($this->getPathToComposerlock());
+		// to keep the list up to date while removing resolved issues we keep all ids of again encountered issues
+		$remainingEntries = array();
 
-			// are there any issues known?
-			if (is_array($alerts) && empty($alerts)) {
-				$this->message('No known security vulnerabilities have been found.');
-			} else {
-				$this->message('The following modules have known security vulnerabilities');
-				foreach ($alerts as $package => $packageDetails) {
-					// write the heading and then list all known advisories
-					$this->message(sprintf(
-						'%s v%s: ',
-						$package,
-						$packageDetails['version']
+		// use the security checker of
+		$checker = new SecurityChecker();
+		$alerts = $checker->check($this->getPathToComposerlock());
+
+		// Are there any issues known? If so save the information in the database
+		if (is_array($alerts) && !empty($alerts)) {
+			// go through all alerts for packages - each can contain multiple issues
+			foreach ($alerts as $package => $packageDetails) {
+				// go through each individual known security issue
+				foreach ($packageDetails['advisories'] as $details) {
+					// check if this vulnerability is already known
+					$vulnerability = ComposerSecurityVulnerability::get()->filter(array(
+						'Package'	=> $package,
+						'Version'	=> $packageDetails['version'],
+						'Title'		=> $details['title'],
 					));
 
-					// list all known issues
-					foreach ($packageDetails['advisories'] as $file => $details) {
-						$this->message(sprintf(
-							'%s (%s %s)',
-							$details['title'],
-							$this->link($details['link'], 'Source'),
-							($details['cve'] == '') ? '' : $this->link(
-								'https://cve.mitre.org/cgi-bin/cvename.cgi?name=' . $details['cve'],
-								$details['cve']
-							)
-						));
+					// Is this vulnerability known? No, lets add it.
+					if ((int) $vulnerability->count() === 0) {
+						$vulnerability = new ComposerSecurityVulnerability();
+						$vulnerability->Package	= $package;
+						$vulnerability->Version	= $packageDetails['version'];
+						$vulnerability->Title	= $details['title'];
+						$vulnerability->Link	= $details['link'];
+						$vulnerability->CVE		= $details['cve'];
+						$vulnerability->write();
+
+						// add the new entries to the list of the remaining entries
+						$remainingEntries[] = $vulnerability->ID;
+					} else {
+						// add all matching known vulnerabilities - this way we can keep those.
+						$remainingEntries = array_merge($remainingEntries, $vulnerability->column('ID'));
 					}
 				}
 			}
-
-			$this->message('The task finished running.');
 		}
+
+		// remove all entries which are resolved (not in $remainingEntries)
+		foreach (ComposerSecurityVulnerability::get()->exclude(array('ID' => $remainingEntries)) as $vulnerability) {
+			$vulnerability->delete();
+		}
+
+		// notify that the task finished.
+		$this->message('The task finished running. You can find the updated information in the database now.');
 	}
 
 	/**
@@ -70,17 +80,6 @@ class SecurityCheckerTask extends BuildTask {
 	 */
 	protected function getPathToComposerlock() {
 		return (($this->isCLI()) ? '..' : $_SERVER['DOCUMENT_ROOT']) . '/composer.lock';
-	}
-
-	/**
-	 * create an a tag
-	 *
-	 * @param string $href
-	 * @param string $text
-	 * @return string
-	 */
-	protected function link($href, $text) {
-		return $this->isCLI() ? $href : '<a href="' . $href . '" target="_blank">' . $text . '</a>';
 	}
 
 	/**
