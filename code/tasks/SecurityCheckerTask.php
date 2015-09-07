@@ -45,7 +45,7 @@ class SecurityCheckerTask extends BuildTask {
 						$vulnerability->Package	= $package;
 						$vulnerability->Version	= $packageDetails['version'];
 						$vulnerability->Title	= $details['title'];
-						$vulnerability->Link	= $details['link'];
+						$vulnerability->ExternalLink = $details['link'];
 						$vulnerability->CVE		= $details['cve'];
 						$vulnerability->write();
 
