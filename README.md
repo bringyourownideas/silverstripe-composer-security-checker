@@ -4,7 +4,7 @@ Adds a task which runs a check if any of the dependencies has known security vul
 [SensioLabs Security Check Web service][1] and the [Security Advisories Database][2].
 
 *Because this module could expose information to an potential attacker the information doesn't get displayed!
-You need to take care of processing this information somehow! E.g. using the SilverStripe maintenance module*
+You need to take care of processing this information somehow! E.g. using the [SilverStripe Maintenance module](https://github.com/FriendsOfSilverStripe/silverstripe-maintenance)*
 
 **Recommendation is to only install this as dev dependency!**
 
