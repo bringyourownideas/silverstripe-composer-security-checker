@@ -14,5 +14,9 @@
 	"require" : {
 		"silverstripe/framework": "3.*",
 		"sensiolabs/security-checker": "*@stable"
+	},
+	"suggest": {
+		"friendsofsilverstripe/silverstripe-maintenance": "Modeladmin for SilverStripe security checker",
+		"silverstripe/queuedjobs": "Allows to run security checker as queuedjob"
 	}
 }
