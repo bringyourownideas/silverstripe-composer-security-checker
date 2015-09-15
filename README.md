@@ -24,6 +24,8 @@ Run the following command to install this package as a development dependency:
    ```
    composer require spekulatius/silverstripe-composer-security-checker
    ```
+   
+Please run /dev/build after composer has finished the installation.
 
 ## Usage
 
