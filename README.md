@@ -6,8 +6,6 @@ Adds a task which runs a check if any of the dependencies has known security vul
 *Because this module could expose information to an potential attacker the information doesn't get displayed!
 You need to take care of processing this information somehow! E.g. using the [SilverStripe Maintenance module](https://github.com/FriendsOfSilverStripe/silverstripe-maintenance)*
 
-**Recommendation is to only install this as dev dependency!**
-
 ## Requirements
 
 * SilverStripe Framework 3.*
@@ -26,6 +24,8 @@ Run the following command to install this package as a development dependency:
    ```
    
 Please run /dev/build after composer has finished the installation.
+
+**Recommendation is to only install this as dev dependency!**
 
 ## Usage
 
