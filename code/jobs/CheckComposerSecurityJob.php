@@ -5,7 +5,7 @@
  * @author Peter Thaleikis
  * @license MIT
  */
-class ComposerSecurityCheckJob extends AbstractQueuedJob implements QueuedJob {
+class CheckComposerSecurityJob extends AbstractQueuedJob implements QueuedJob {
 	/**
 	 * The task to run
 	 *
@@ -39,7 +39,7 @@ class ComposerSecurityCheckJob extends AbstractQueuedJob implements QueuedJob {
 	 */
 	public function setup() {
 		// create the instance of the task
-		$this->task = new SecurityCheckerTask();
+		$this->task = new CheckComposerSecurityTask();
 	}
 
 	/**

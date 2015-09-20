@@ -4,7 +4,7 @@
  */
 use SensioLabs\Security\SecurityChecker;
 
-class SecurityCheckerTask extends BuildTask {
+class CheckComposerSecurityTask extends BuildTask {
 	/**
 	 * @var string
 	 */
