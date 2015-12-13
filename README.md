@@ -1,10 +1,11 @@
 # SilverStripe composer security checker
 
 [![Build Status](https://api.travis-ci.org/spekulatius/silverstripe-composer-security-checker.svg?branch=master)](https://travis-ci.org/spekulatius/silverstripe-composer-security-checker)
-[![Latest Stable Version](https://poser.pugx.org/spekulatius/silverstripe-composer-security-checker/version.svg)](http://www.silverstripe.org/stable-download/)
+[![Latest Stable Version](https://poser.pugx.org/spekulatius/silverstripe-composer-security-checker/version.svg)](https://github.com/spekulatius/silverstripe-composer-security-checker/releases)
 [![Latest Unstable Version](https://poser.pugx.org/spekulatius/silverstripe-composer-security-checker/v/unstable.svg)](https://packagist.org/packages/spekulatius/silverstripe-composer-security-checker)
+[![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/spekulatius/silverstripe-composer-security-checker.svg)](https://scrutinizer-ci.com/g/spekulatius/silverstripe-composer-security-checker?branch=master)
 [![Total Downloads](https://poser.pugx.org/spekulatius/silverstripe-composer-security-checker/downloads.svg)](https://packagist.org/packages/spekulatius/silverstripe-composer-security-checker)
-[![License](https://poser.pugx.org/spekulatius/silverstripe-composer-security-checker/license.svg)](https://github.com/spekulatius/silverstripe-composer-security-checker#license)
+[![License](https://poser.pugx.org/spekulatius/silverstripe-composer-security-checker/license.svg)](https://github.com/spekulatius/silverstripe-composer-security-checker/blob/master/license.md)
 
 Adds a task which runs a check if any of the dependencies has known security vulnerabilities. It uses the
 [SensioLabs Security Check Web service][1] and the [Security Advisories Database][2].
