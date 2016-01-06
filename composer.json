@@ -1,23 +1,30 @@
 {
-	"name" : "spekulatius/silverstripe-composer-security-checker",
-	"description" : "Task which checks if any composer dependencies has known vulnerabilities.",
-	"type" : "silverstripe-module",
-	"license" : "BSD-3-Clause",
-	"keywords" : ["silverstripe","environment", "composer", "updates", "vulnerabilities", "security"],
-	"authors" : [
-		{
-			"name" : "Peter Thaleikis",
-			"email" : "info@thaleikis.de",
-			"homepage" : "https://github.com/spekulatius"
-		}
-	],
-	"require" : {
-		"silverstripe/framework": "3.*",
-		"sensiolabs/security-checker": "*@stable"
-	},
-	"suggest": {
-		"friendsofsilverstripe/silverstripe-maintenance": "Modeladmin for SilverStripe security checker",
-		"silverstripe/queuedjobs": "Allows to run security checker as queuedjob",
-		"roave/security-advisories": "Raises a conflict on attempt to install a vulnerable module"
-	}
+    "name": "spekulatius/silverstripe-composer-security-checker",
+    "description": "Task which checks if any composer dependencies has known vulnerabilities.",
+    "type": "silverstripe-module",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "silverstripe",
+        "environment",
+        "composer",
+        "updates",
+        "vulnerabilities",
+        "security"
+    ],
+    "authors": [
+        {
+            "name": "Peter Thaleikis",
+            "email": "info@thaleikis.de",
+            "homepage": "https://github.com/spekulatius"
+        }
+    ],
+    "require": {
+        "silverstripe/framework": "3.*",
+        "sensiolabs/security-checker": "*@stable"
+    },
+    "suggest": {
+        "friendsofsilverstripe/silverstripe-maintenance": "Modeladmin for SilverStripe security checker",
+        "silverstripe/queuedjobs": "Allows to run security checker as queuedjob",
+        "roave/security-advisories": "Raises a conflict on attempt to install a vulnerable module"
+    }
 }
