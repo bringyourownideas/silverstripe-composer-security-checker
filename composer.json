@@ -26,5 +26,9 @@
         "friendsofsilverstripe/silverstripe-maintenance": "Modeladmin for SilverStripe security checker",
         "silverstripe/queuedjobs": "Allows to run security checker as queuedjob",
         "roave/security-advisories": "Raises a conflict on attempt to install a vulnerable module"
-    }
+    },
+    "support": {
+        "issues": "https://github.com/spekulatius/silverstripe-composer-security-checker/issues"
+    },
+    "homepage": "https://github.com/spekulatius/silverstripe-composer-security-checker"
 }
