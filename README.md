@@ -15,7 +15,8 @@ You need to take care of processing this information somehow! E.g. using the [Si
 
 ## Requirements
 
-* SilverStripe Framework 3.*
+* SilverStripe Framework ^3.0
+* SilverStripe QueuedJobs *
 
 ## Installation
 
