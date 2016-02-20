@@ -19,11 +19,11 @@
     ],
     "require": {
         "silverstripe/framework": "3.*",
-        "sensiolabs/security-checker": "*@stable"
+        "sensiolabs/security-checker": "*@stable",
+        "silverstripe/queuedjobs": "*@stable"
     },
     "suggest": {
         "friendsofsilverstripe/silverstripe-maintenance": "Modeladmin for SilverStripe security checker",
-        "silverstripe/queuedjobs": "Allows to run security checker as queuedjob",
         "roave/security-advisories": "Raises a conflict on attempt to install a vulnerable module"
     },
     "support": {
