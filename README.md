@@ -20,15 +20,15 @@ You need to take care of processing this information somehow! E.g. using the [Si
 ## Installation
 
 Run the following command to install this package as a development dependency:
-   ```
-   composer require spekulatius/silverstripe-composer-security-checker --dev
-   ```
+```
+composer require spekulatius/silverstripe-composer-security-checker --dev
+```
 
 *or* as general dependency:
 
-   ```
-   composer require spekulatius/silverstripe-composer-security-checker
-   ```
+```
+composer require spekulatius/silverstripe-composer-security-checker
+```
 
 Please run /dev/build after composer has finished the installation.
 
