@@ -20,30 +20,29 @@ You need to take care of processing this information somehow! E.g. using the [Si
 
 ## Installation
 
-Run the following command to install this package as a development dependency:
+The following installation commands includes schedulding a queuedjob to populate the data. Run the following command to install this package as a development dependency:
+
 ```
 composer require spekulatius/silverstripe-composer-security-checker dev-master --dev
+php ./framework/cli-script.php dev/build
+php ./framework/cli-script.php dev/tasks/ProcessJobQueueTask
 ```
 
 *or* as general dependency:
 
 ```
 composer require spekulatius/silverstripe-composer-security-checker dev-master
+php ./framework/cli-script.php dev/build
+php ./framework/cli-script.php dev/tasks/ProcessJobQueueTask
 ```
-
-Please run /dev/build after composer has finished the installation.
 
 **Recommendation is to only install this as dev dependency!**
 
 ## Usage
 
-After the installation execute the following steps:
+The information gets automatically updated via a queuedjob on dev/build. You will need to run the queuedjobs task to get the information.
 
-1. Go onto your website mysite.com/dev/tasks and find the security checker task.
-
-2. Run the task and wait for the task to finish (displays message). This can take some time - depending on the number of dependencies.
-
-3. Use the information in your database (Table "ComposerSecurityVulnerability").
+Use the information in your database (Table "ComposerSecurityVulnerability") as you like. Please be careful how you expose this information.
 
 Future development / Ideas
 --------------------------
