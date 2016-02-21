@@ -36,19 +36,19 @@ class CheckComposerSecurityTask extends BuildTask
                 foreach ($packageDetails['advisories'] as $details) {
                     // check if this vulnerability is already known
                     $vulnerability = ComposerSecurityVulnerability::get()->filter(array(
-                        'Package'    => $package,
-                        'Version'    => $packageDetails['version'],
-                        'Title'        => $details['title'],
+                        'Package' => $package,
+                        'Version' => $packageDetails['version'],
+                        'Title'   => $details['title'],
                     ));
 
                     // Is this vulnerability known? No, lets add it.
                     if ((int) $vulnerability->count() === 0) {
                         $vulnerability = new ComposerSecurityVulnerability();
-                        $vulnerability->Package            = $package;
-                        $vulnerability->Version            = $packageDetails['version'];
-                        $vulnerability->Title            = $details['title'];
-                        $vulnerability->ExternalLink    = $details['link'];
-                        $vulnerability->CVE                = $details['cve'];
+                        $vulnerability->Package      = $package;
+                        $vulnerability->Version      = $packageDetails['version'];
+                        $vulnerability->Title        = $details['title'];
+                        $vulnerability->ExternalLink = $details['link'];
+                        $vulnerability->CVE          = $details['cve'];
                         $vulnerability->write();
 
                         // add the new entries to the list of the remaining entries
