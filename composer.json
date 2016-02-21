@@ -1,6 +1,6 @@
 {
     "name": "spekulatius/silverstripe-composer-security-checker",
-    "description": "Task which checks if any composer dependencies has known vulnerabilities.",
+    "description": "Provides information if your SilverStripe application uses dependencies with known vulnerabilities.",
     "type": "silverstripe-module",
     "license": "BSD-3-Clause",
     "keywords": [
