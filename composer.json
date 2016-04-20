@@ -19,7 +19,7 @@
     ],
     "require": {
         "silverstripe/framework": "^3.0",
-        "sensiolabs/security-checker": "^3.2",
+        "sensiolabs/security-checker": "^3.0",
         "silverstripe/queuedjobs": "^2.8"
     },
     "suggest": {
