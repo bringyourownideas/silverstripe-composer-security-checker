@@ -1,4 +1,4 @@
-# SilverStripe composer security checker
+# [SilverStripe composer security checker](https://github.com/spekulatius/silverstripe-composer-security-checker)
 
 [![Build Status](https://api.travis-ci.org/spekulatius/silverstripe-composer-security-checker.svg?branch=master)](https://travis-ci.org/spekulatius/silverstripe-composer-security-checker)
 [![Latest Stable Version](https://poser.pugx.org/spekulatius/silverstripe-composer-security-checker/version.svg)](https://github.com/spekulatius/silverstripe-composer-security-checker/releases)
