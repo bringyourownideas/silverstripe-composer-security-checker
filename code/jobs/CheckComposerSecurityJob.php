@@ -3,7 +3,7 @@
  * Composer security checker job. Runs the task which does the check as a queuedjob.
  *
  * @author Peter Thaleikis
- * @license MIT
+ * @license BSD-3-Clause
  */
 class CheckComposerSecurityJob extends AbstractQueuedJob implements QueuedJob
 {
