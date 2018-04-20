@@ -1,4 +1,4 @@
-# [SilverStripe composer security checker](https://github.com/spekulatius/silverstripe-composer-security-checker) <br /> [![Build Status](https://api.travis-ci.org/spekulatius/silverstripe-composer-security-checker.svg?branch=master)](https://travis-ci.org/spekulatius/silverstripe-composer-security-checker) [![Latest Stable Version](https://poser.pugx.org/spekulatius/silverstripe-composer-security-checker/version.svg)](https://github.com/spekulatius/silverstripe-composer-security-checker/releases) [![Latest Unstable Version](https://poser.pugx.org/spekulatius/silverstripe-composer-security-checker/v/unstable.svg)](https://packagist.org/packages/spekulatius/silverstripe-composer-security-checker) [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/spekulatius/silverstripe-composer-security-checker.svg)](https://scrutinizer-ci.com/g/spekulatius/silverstripe-composer-security-checker?branch=master) [![Total Downloads](https://poser.pugx.org/spekulatius/silverstripe-composer-security-checker/downloads.svg)](https://packagist.org/packages/spekulatius/silverstripe-composer-security-checker) [![License](https://poser.pugx.org/spekulatius/silverstripe-composer-security-checker/license.svg)](https://github.com/spekulatius/silverstripe-composer-security-checker/blob/master/license.md)
+# [SilverStripe composer security checker](https://github.com/bringyourownideas/silverstripe-composer-security-checker) <br /> [![Build Status](https://api.travis-ci.org/bringyourownideas/silverstripe-composer-security-checker.svg?branch=master)](https://travis-ci.org/bringyourownideas/silverstripe-composer-security-checker) [![Latest Stable Version](https://poser.pugx.org/bringyourownideas/silverstripe-composer-security-checker/version.svg)](https://github.com/bringyourownideas/silverstripe-composer-security-checker/releases) [![Latest Unstable Version](https://poser.pugx.org/bringyourownideas/silverstripe-composer-security-checker/v/unstable.svg)](https://packagist.org/packages/bringyourownideas/silverstripe-composer-security-checker) [![Scrutinizer Code Quality](https://img.shields.io/scrutinizer/g/bringyourownideas/silverstripe-composer-security-checker.svg)](https://scrutinizer-ci.com/g/bringyourownideas/silverstripe-composer-security-checker?branch=master) [![Total Downloads](https://poser.pugx.org/bringyourownideas/silverstripe-composer-security-checker/downloads.svg)](https://packagist.org/packages/bringyourownideas/silverstripe-composer-security-checker) [![License](https://poser.pugx.org/bringyourownideas/silverstripe-composer-security-checker/license.svg)](https://github.com/bringyourownideas/silverstripe-composer-security-checker/blob/master/license.md)
 
 Adds a task which runs a check if any of the dependencies has known security vulnerabilities. It uses the
 [SensioLabs Security Check Web service][1] and the [Security Advisories Database][2].
@@ -19,7 +19,7 @@ You need to take care of processing this information somehow! E.g. using the [Si
 The following installation commands includes schedulding a queuedjob to populate the data. Run the following command to install this package as a development dependency:
 
 ```
-composer require spekulatius/silverstripe-composer-security-checker dev-master --dev
+composer require bringyourownideas/silverstripe-composer-security-checker dev-master --dev
 php ./framework/cli-script.php dev/build
 php ./framework/cli-script.php dev/tasks/ProcessJobQueueTask
 ```
@@ -27,7 +27,7 @@ php ./framework/cli-script.php dev/tasks/ProcessJobQueueTask
 *or* as general dependency:
 
 ```
-composer require spekulatius/silverstripe-composer-security-checker dev-master
+composer require bringyourownideas/silverstripe-composer-security-checker dev-master
 php ./framework/cli-script.php dev/build
 php ./framework/cli-script.php dev/tasks/ProcessJobQueueTask
 ```
