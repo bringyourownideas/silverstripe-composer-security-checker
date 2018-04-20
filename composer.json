@@ -18,6 +18,7 @@
         }
     ],
     "require": {
+        "php": ">=5.6.0",
         "silverstripe/framework": "^3.0",
         "sensiolabs/security-checker": "^3.0",
         "silverstripe/queuedjobs": "^2.8"
