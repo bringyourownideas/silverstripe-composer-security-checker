@@ -1,10 +1,3 @@
-silverstripe-timezones/
-silverstripe-maintenance/
-silverstripe-geodata-uploadfield/
-silverstripe-composer-versions/
-silverstripe-composer-update-checker/
-silverstripe-composer-security-checker/
-silverstripe-release-notifications/
-GitPolicy/
-PainfreeReleaseNotes/
-backendmessages/
+# Contributing
+
+Contributions are welcome! Create an issue, explaining a bug or proposal. Submit pull requests if you feel brave.
