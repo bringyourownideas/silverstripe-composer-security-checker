@@ -1,5 +1,5 @@
 {
-    "name": "spekulatius/silverstripe-composer-security-checker",
+    "name": "bringyourownideas/silverstripe-composer-security-checker",
     "description": "Provides information if your SilverStripe application uses dependencies with known vulnerabilities.",
     "type": "silverstripe-module",
     "license": "BSD-3-Clause",
@@ -22,12 +22,15 @@
         "sensiolabs/security-checker": "^3.0",
         "silverstripe/queuedjobs": "^2.8"
     },
+    "replace": {
+        "spekulatius/silverstripe-composer-security-checker": "self.version"
+    },
     "suggest": {
         "friendsofsilverstripe/silverstripe-maintenance": "Modeladmin for SilverStripe security checker",
         "roave/security-advisories": "Raises a conflict on attempt to install a vulnerable module"
     },
     "support": {
-        "issues": "https://github.com/spekulatius/silverstripe-composer-security-checker/issues"
+        "issues": "https://github.com/bringyourownideas/silverstripe-composer-security-checker/issues"
     },
-    "homepage": "https://github.com/spekulatius/silverstripe-composer-security-checker"
+    "homepage": "https://github.com/bringyourownideas/silverstripe-composer-security-checker"
 }
