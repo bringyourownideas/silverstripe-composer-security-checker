@@ -3,10 +3,9 @@
 Adds a task which runs a check if any of the dependencies has known security vulnerabilities. It uses the
 [SensioLabs Security Check Web service][1] and the [Security Advisories Database][2].
 
-*Because this module could expose information to an potential attacker the information doesn't get displayed!
+You need to take care of processing/display this information somehow! E.g. using the [SilverStripe Maintenance module](https://github.com/bringyourownideas/silverstripe-maintenance "supports you with the maintainence of your SilverStripe project")*
 
-You need to take care of processing this information somehow! E.g. using the [SilverStripe Maintenance module](https://github.com/FriendsOfSilverStripe/silverstripe-maintenance "supports you with the maintainence of your SilverStripe project")*
-
+*This module could potentially expose information to an attacker - so the this module itself doesn't display the information anywhere itself!
 
 ### Requirements
 
@@ -42,7 +41,7 @@ The information gets automatically updated via a queuedjob on dev/build. You wil
 Use the information in your database (Table "ComposerSecurityVulnerability") as you like. Please be careful how you expose this information.
 
 
-## MISC: [Future ideas/development, issues](https://github.com/FriendsOfSilverStripe/silverstripe-composer-security-checker/issues), [Contributing](https://github.com/FriendsOfSilverStripe/silverstripe-composer-security-checker/blob/master/CONTRIBUTING.md), [License](https://github.com/FriendsOfSilverStripe/silverstripe-composer-security-checker/blob/master/license.md)
+## MISC: [Future ideas/development, issues](https://github.com/bringyourownideas/silverstripe-composer-security-checker/issues), [Contributing](https://github.com/bringyourownideas/silverstripe-composer-security-checker/blob/master/CONTRIBUTING.md), [License](https://github.com/bringyourownideas/silverstripe-composer-security-checker/blob/master/license.md)
 
 [1]: http://security.sensiolabs.org/
 [2]: https://github.com/FriendsOfPHP/security-advisories
