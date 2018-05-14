@@ -3,9 +3,7 @@
 Adds a task which runs a check if any of the dependencies has known security vulnerabilities. It uses the
 [SensioLabs Security Check Web service][1] and the [Security Advisories Database][2].
 
-You need to take care of processing/display this information somehow! E.g. using the [SilverStripe Maintenance module](https://github.com/bringyourownideas/silverstripe-maintenance "supports you with the maintainence of your SilverStripe project")*
-
-*This module could potentially expose information to an attacker - so the this module itself doesn't display the information anywhere itself!
+The information is displayed using the [SilverStripe Maintenance module](https://github.com/bringyourownideas/silverstripe-maintenance "supports you with the maintainence of your SilverStripe project").
 
 ### Requirements
 
