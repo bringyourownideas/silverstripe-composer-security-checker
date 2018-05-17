@@ -52,7 +52,7 @@ class CheckComposerSecurityJob extends AbstractQueuedJob implements QueuedJob
     public function process()
     {
         // run the task
-        $this->task->run(new SS_HTTPRequest());
+        $this->task->run(new SS_HTTPRequest('GET', '/'));
 
         // mark job as completed
         $this->isComplete = true;
