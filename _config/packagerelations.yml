@@ -1,0 +1,15 @@
+---
+Name: packagerelations
+after: '#updatecheckerextensions'
+Only:
+  moduleexists: silverstripe-maintenance
+---
+Package:
+  extensions:
+    - PackageSecurityExtension
+CVE:
+  extensions:
+    - CVEExtension
+SiteSummary:
+  extensions:
+    - SiteSummaryExtension
