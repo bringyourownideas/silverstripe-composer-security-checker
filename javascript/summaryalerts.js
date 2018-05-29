@@ -2,11 +2,6 @@
   $.entwine('ss', function($) {
     $('.package-summary__security-alerts').entwine({
       IsShown: false,
-      onclick: function(event) {
-        if ($(event.target).is('strong, strong>span')) {
-          this.toggleSecurityNotices();
-        }
-      },
       toggleSecurityNotices: function() {
         if (this.getIsShown()) {
           this.hideSecurityNotices();
@@ -15,14 +10,23 @@
         }
       },
       showSecurityNotices: function() {
-        this.children('dl').show();
-        this.find('strong>span').text('Hide');
+        this.getAlertList().show();
         this.setIsShown(true);
       },
       hideSecurityNotices: function() {
-        this.children('dl').hide();
-        this.find('strong>span').text('Show');
+        this.getAlertList().hide();
         this.setIsShown(false);
+      },
+      getAlertList: function() {
+        return this.children('.security-alerts__list');
+      }
+    });
+    $('.security-alerts__toggler').entwine({
+      onclick: function(event) {
+        this.parent()
+          .nextAll('.package-summary__security-alerts')
+          .toggleSecurityNotices();
+        event.preventDefault();
       }
     });
   });

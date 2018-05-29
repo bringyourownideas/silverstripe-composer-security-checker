@@ -40,7 +40,7 @@ class PackageSecurityExtension extends DataExtension
     public function updateBadges(&$badges)
     {
         if ($this->owner->SecurityAlerts()->exists()) {
-            $badges['RISK: Security'] = 'warning';
+            $badges['RISK: Security'] = 'warning security-alerts__toggler';
         }
     }
 

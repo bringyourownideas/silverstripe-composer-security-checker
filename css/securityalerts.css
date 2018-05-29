@@ -1,7 +1,8 @@
-.package-summary__security-alerts {
+.security-alerts__list {
   margin-top: 8px;
+  display: none;
 }
 
-.security-alerts__list {
-  display: none;
+.security-alerts__toggler {
+  cursor: pointer;
 }

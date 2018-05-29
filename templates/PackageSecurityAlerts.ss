@@ -1,6 +1,5 @@
 <% if $SecurityAlerts %>
 <div class="package-summary__security-alerts">
-    <strong><span>View</span> security alert info</strong>
     <dl class="security-alerts__list">
         <% loop $SecurityAlerts %>
         <dt><a href="$ExternalLink">$CVE</a></dt>
