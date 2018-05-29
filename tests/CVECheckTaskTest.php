@@ -41,12 +41,12 @@ CVENOTICE;
         $checkTask->setSecurityChecker($securityCheckerMock);
 
         $preCheck = CVE::get();
-        $this->assertEquals(0, $preCheck->count(), 'database is empty to begin with');
+        $this->assertCount(0, $preCheck, 'database is empty to begin with');
 
         $checkTask->run(null);
 
         $postCheck = CVE::get();
-        $this->assertEquals(1, $postCheck->count(), 'CVE has been stored');
+        $this->assertCount(1, $postCheck, 'CVE has been stored');
     }
 
     public function testNoDuplicates()
@@ -56,17 +56,17 @@ CVENOTICE;
         $checkTask->setSecurityChecker($securityCheckerMock);
 
         $preCheck = CVE::get();
-        $this->assertEquals(0, $preCheck->count(), 'database is empty to begin with');
+        $this->assertCount(0, $preCheck, 'database is empty to begin with');
 
         $checkTask->run(null);
 
         $postCheck = CVE::get();
-        $this->assertEquals(1, $postCheck->count(), 'CVE has been stored');
+        $this->assertCount(1, $postCheck, 'CVE has been stored');
         
         $checkTask->run(null);
 
         $postCheck = CVE::get();
-        $this->assertEquals(1, $postCheck->count(), 'The CVE isn\'t stored twice.');
+        $this->assertCount(1, $postCheck, 'The CVE isn\'t stored twice.');
     }
 
     public function testCVERemovals()
@@ -78,7 +78,7 @@ CVENOTICE;
         $checkTask->run(null);
 
         $preCheck = CVE::get();
-        $this->assertEquals(1, $preCheck->count(), 'database has stored CVEs');
+        $this->assertCount(1, $preCheck, 'database has stored CVEs');
 
         $securityCheckerMock = $this->getSecurityCheckerMock(true);
         $checkTask->setSecurityChecker($securityCheckerMock);
@@ -86,6 +86,6 @@ CVENOTICE;
         $checkTask->run(null);
 
         $postCheck = CVE::get();
-        $this->assertEquals(0, $postCheck->count(), 'database is empty to finish with');
+        $this->assertCount(0, $postCheck, 'database is empty to finish with');
     }
 }

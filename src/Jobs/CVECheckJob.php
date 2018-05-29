@@ -19,16 +19,16 @@ class CVECheckJob extends AbstractQueuedJob implements QueuedJob
     /**
      * @return CVECheckTask
      */
-    public function getCVECheckTask()
+    public function getCheckTask()
     {
         return $this->checkTask;
     }
 
     /**
-     * @param CVECheckTask
+     * @param CVECheckTask $checkTask
      * @return CVECheckJob
      */
-    public function setCVECheckTask($checkTask)
+    public function setCheckTask(CVECheckTask $checkTask)
     {
         $this->checkTask = $checkTask;
         return $this;
@@ -52,7 +52,7 @@ class CVECheckJob extends AbstractQueuedJob implements QueuedJob
     public function process()
     {
         // run the task
-        $task = $this->getCVECheckTask();
+        $task = $this->getCheckTask();
         $task->run(null);
 
         // mark job as completed

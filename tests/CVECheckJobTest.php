@@ -8,7 +8,7 @@ class CVECheckJobTest extends SapphireTest
         $spy->expects($this->once())->method('run');
 
         $job = new CVECheckJob;
-        $job->setCVECheckTask($spy);
+        $job->setCheckTask($spy);
 
         $job->process();
     }

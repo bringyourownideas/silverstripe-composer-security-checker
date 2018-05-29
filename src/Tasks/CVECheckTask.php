@@ -31,9 +31,9 @@ class CVECheckTask extends BuildTask
 
     /**
      * @param SecurityChecker $securityChecker
-     * @return CVECheckTask $this
+     * @return $this
      */
-    public function setSecurityChecker($securityChecker)
+    public function setSecurityChecker(SecurityChecker $securityChecker)
     {
         $this->securityChecker = $securityChecker;
         return $this;
@@ -61,7 +61,7 @@ class CVECheckTask extends BuildTask
 
                 // Is this vulnerability known? No, lets add it.
                 if ((int) $vulnerability->count() === 0) {
-                    $vulnerability = new CVE();
+                    $vulnerability = CVE::create();
                     $vulnerability->PackageName  = $package;
                     $vulnerability->Version      = $packageDetails['version'];
                     $vulnerability->Title        = $details['title'];
@@ -87,15 +87,15 @@ class CVECheckTask extends BuildTask
         }
 
         // remove all entries which are resolved (no longer $validEntries)
-        $removeOldCVEs = SQLDelete::create('CVE');
+        $removeOldCVEs = SQLDelete::create('"CVE"');
         if (empty($validEntries)) {
-            // There were no CVEs listed for our installation
+            // There were no CVEs listed for our installation - so flush any old data
             $removeOldCVEs->execute();
         } else {
             $removable = CVE::get()->exclude(array('ID' => $validEntries));
             if ($removable->exists()) {
                 // Be careful not to remove all CVEs on the case that entry is valid
-                $removeOldCVEs = $removeOldCVEs->addWhere('ID', $removable->column('ID'));
+                $removeOldCVEs = $removeOldCVEs->addWhere('"ID"', $removable->column('ID'));
                 $removeOldCVEs->execute();
             }
         }
