@@ -19,10 +19,15 @@
     ],
     "require": {
         "php": ">=5.6.0",
-        "silverstripe/framework": "^3.0",
+        "silverstripe/framework": "^4",
         "sensiolabs/security-checker": "^3.0",
-        "symbiote/silverstripe-queuedjobs": "^2.8",
-        "friendsofsilverstripe/silverstripe-maintenance": "^0.3"
+        "symbiote/silverstripe-queuedjobs": "^3",
+        "friendsofsilverstripe/silverstripe-maintenance": "^2@dev"
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "2.x-dev"
+        }
     },
     "replace": {
         "spekulatius/silverstripe-composer-security-checker": "self.version"
