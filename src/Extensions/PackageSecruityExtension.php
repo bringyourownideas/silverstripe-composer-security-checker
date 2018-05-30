@@ -35,12 +35,15 @@ class PackageSecurityExtension extends DataExtension
      * updates the badges that render as part of the screen targeted
      * summary for this Package
      *
-     * @param array $badges in the format of [title => type]
+     * @param ArrayList $badges
      */
     public function updateBadges(&$badges)
     {
         if ($this->owner->SecurityAlerts()->exists()) {
-            $badges['RISK: Security'] = 'warning security-alerts__toggler';
+            $badges->push(ArrayData::create([
+                'Title' => _t(__CLASS__ . '.BADGE_SECURITY', 'RISK: Security'),
+                'Type' => 'warning security-alerts__toggler',
+            ]));
         }
     }
 
