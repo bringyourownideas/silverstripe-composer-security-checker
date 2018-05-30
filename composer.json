@@ -24,6 +24,11 @@
         "symbiote/silverstripe-queuedjobs": "^2.8",
         "friendsofsilverstripe/silverstripe-maintenance": "^0.3"
     },
+    "extra": {
+        "branch-alias": {
+            "1.x-dev": "1.0.x-dev"
+        }
+    },
     "replace": {
         "spekulatius/silverstripe-composer-security-checker": "self.version"
     },
