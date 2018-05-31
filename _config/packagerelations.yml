@@ -7,9 +7,9 @@ Only:
 Package:
   extensions:
     - PackageSecurityExtension
-CVE:
+SecurityAlert:
   extensions:
-    - CVEExtension
+    - SecurityAlertExtension
 SiteSummary:
   extensions:
     - SiteSummaryExtension

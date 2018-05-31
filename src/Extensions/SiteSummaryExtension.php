@@ -4,7 +4,7 @@ class SiteSummaryExtension extends Extension
 {
     /**
      * Update screen bound report columns to remove the text (csv) column
-     * listing CVE numbers, and include the view assets to render appropriately
+     * listing SecurityAlert Identifier numbers, and include the view assets to render appropriately
      *
      * @param array $columns Report display columns
      */
@@ -12,7 +12,7 @@ class SiteSummaryExtension extends Extension
     {
         Requirements::css('silverstripe-composer-security-checker/css/securityalerts.css');
         Requirements::javascript('silverstripe-composer-security-checker/javascript/summaryalerts.js');
-        unset($columns['listCVEs']);
+        unset($columns['listSecurityAlertIdentifiers']);
     }
 
     /**

@@ -3,20 +3,20 @@
 class PackageSecurityExtension extends DataExtension
 {
     private static $has_many = [
-        'SecurityAlerts' => 'CVE'
+        'SecurityAlerts' => 'SecurityAlert'
     ];
 
     private static $summary_fields = [
-        'listCVEs' => 'Security alerts',
+        'listSecurityAlertIdentifiers' => 'Security alerts',
     ];
 
     /**
-     * Simply returns a comma separated list of active CVE numbers for this record.
+     * Simply returns a comma separated list of active SecurityAlert Identifiers for this record.
      * Used in CSV exports as a type of brief indication (as opposed to full info)
      */
-    public function listCVEs()
+    public function listSecurityAlertIdentifiers()
     {
-        $alerts = $this->owner->SecurityAlerts()->Column('CVE');
+        $alerts = $this->owner->SecurityAlerts()->Column('Identifier');
         return $alerts ? implode(', ', $alerts) : null;
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-class CVEExtension extends DataExtension
+class SecurityAlertExtension extends DataExtension
 {
     private static $has_one = [
         'PackageRecord' => 'Package'

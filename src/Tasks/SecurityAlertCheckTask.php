@@ -5,7 +5,7 @@ use SensioLabs\Security\SecurityChecker;
 /**
  * Checks if there are any insecure dependencies.
  */
-class CVECheckTask extends BuildTask
+class SecurityAlertCheckTask extends BuildTask
 {
     /**
      * @var SecurityChecker
@@ -39,6 +39,27 @@ class CVECheckTask extends BuildTask
         return $this;
     }
 
+    /**
+     * Most SilverStripe issued alerts are _not_ assiged CVEs.
+     * However they have their own identifier in the form of a
+     * prefix to the title - we can use this instead of a CVE ID.
+     *
+     * @param string $cve
+     * @param string $title
+     *
+     * @return string
+     */
+    protected function discernIdentifier($cve, $title)
+    {
+        $identifier = $cve;
+        if (!$identifier || $identifier === '~') {
+            $identifier = explode(':', $title);
+            $identifier = array_shift($identifier);
+        }
+        $this->extend('updateIdentifier', $identifier, $cve, $title);
+        return $identifier;
+    }
+
     public function run($request)
     {
         // to keep the list up to date while removing resolved issues we keep all of found issues
@@ -52,21 +73,22 @@ class CVECheckTask extends BuildTask
         foreach ($alerts as $package => $packageDetails) {
             // go through each individual known security issue
             foreach ($packageDetails['advisories'] as $details) {
+                $identifier = $this->discernIdentifier($details['cve'], $details['title']);
                 // check if this vulnerability is already known
-                $vulnerability = CVE::get()->filter(array(
+                $vulnerability = SecurityAlert::get()->filter(array(
                     'PackageName' => $package,
                     'Version' => $packageDetails['version'],
-                    'CVE'   => $details['cve'],
+                    'Identifier'   => $identifier,
                 ));
 
                 // Is this vulnerability known? No, lets add it.
                 if ((int) $vulnerability->count() === 0) {
-                    $vulnerability = CVE::create();
+                    $vulnerability = SecurityAlert::create();
                     $vulnerability->PackageName  = $package;
                     $vulnerability->Version      = $packageDetails['version'];
                     $vulnerability->Title        = $details['title'];
                     $vulnerability->ExternalLink = $details['link'];
-                    $vulnerability->CVE          = $details['cve'];
+                    $vulnerability->Identifier   = $identifier;
 
                     $vulnerability->write();
 
@@ -77,7 +99,7 @@ class CVECheckTask extends BuildTask
                     $validEntries = array_merge($validEntries, $vulnerability->column('ID'));
                 }
                 
-                if ($vulnerability->hasExtension(CVEExtension::class) &&
+                if ($vulnerability->hasExtension(SecurityAlertExtension::class) &&
                     $vulnerability->PackageRecordID === 0 &&
                     $packageRecord = Package::get()->find('Name', $package)
                 ) {
@@ -87,16 +109,26 @@ class CVECheckTask extends BuildTask
         }
 
         // remove all entries which are resolved (no longer $validEntries)
-        $removeOldCVEs = SQLDelete::create('"CVE"');
+        $removeOldSecurityAlerts = SQLDelete::create('"SecurityAlert"');
         if (empty($validEntries)) {
-            // There were no CVEs listed for our installation - so flush any old data
-            $removeOldCVEs->execute();
+            // There were no SecurityAlerts listed for our installation - so flush any old data
+            $removeOldSecurityAlerts->execute();
         } else {
-            $removable = CVE::get()->exclude(array('ID' => $validEntries));
+            $removable = SecurityAlert::get()->exclude(array('ID' => $validEntries));
+            // Be careful not to remove all SecurityAlerts on the case that every entry is valid
             if ($removable->exists()) {
-                // Be careful not to remove all CVEs on the case that entry is valid
-                $removeOldCVEs = $removeOldCVEs->addWhere('"ID"', $removable->column('ID'));
-                $removeOldCVEs->execute();
+                // SQLConditionalExpression does not support IN() syntax via addWhere
+                // so we have to build this up manually
+                $convertIDsToQuestionMarks = function ($id) {
+                    return '?';
+                };
+                $queryArgs = $removable->column('ID');
+                $paramPlaceholders = implode(',', array_map($convertIDsToQuestionMarks, $queryArgs));
+
+                $removeOldSecurityAlerts = $removeOldSecurityAlerts->addWhere([
+                    '"ID" IN(' . $paramPlaceholders . ')' => $queryArgs
+                ]);
+                $removeOldSecurityAlerts->execute();
             }
         }
 

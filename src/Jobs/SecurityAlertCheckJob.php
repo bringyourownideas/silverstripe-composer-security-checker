@@ -5,19 +5,19 @@
  * @author Peter Thaleikis
  * @license BSD-3-Clause
  */
-class CVECheckJob extends AbstractQueuedJob implements QueuedJob
+class SecurityAlertCheckJob extends AbstractQueuedJob implements QueuedJob
 {
     private static $dependencies = [
-        'CVECheckTask' => '%$' . CVECheckTask::class,
+        'SecurityAlertCheckTask' => '%$' . SecurityAlertCheckTask::class,
     ];
 
     /**
-     * @var CVECheckTask
+     * @var SecurityAlertCheckTask
      */
     protected $checkTask;
 
     /**
-     * @return CVECheckTask
+     * @return SecurityAlertCheckTask
      */
     public function getCheckTask()
     {
@@ -25,10 +25,10 @@ class CVECheckJob extends AbstractQueuedJob implements QueuedJob
     }
 
     /**
-     * @param CVECheckTask $checkTask
-     * @return CVECheckJob
+     * @param SecurityAlertCheckTask $checkTask
+     * @return SecurityAlertCheckJob
      */
-    public function setCheckTask(CVECheckTask $checkTask)
+    public function setCheckTask(SecurityAlertCheckTask $checkTask)
     {
         $this->checkTask = $checkTask;
         return $this;
