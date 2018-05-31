@@ -98,10 +98,13 @@ class SecurityAlertCheckTask extends BuildTask
                     // add existing vulnerabilities (probably just 1) to the list of valid entries
                     $validEntries = array_merge($validEntries, $vulnerability->column('ID'));
                 }
-                
-                if ($vulnerability->hasExtension(SecurityAlertExtension::class) &&
-                    $vulnerability->PackageRecordID === 0 &&
-                    $packageRecord = Package::get()->find('Name', $package)
+
+                // Relate this vulnerability to an existing Package, if the
+                // bringyourownideas/silverstripe-maintenance module is installed
+                if ($vulnerability->hasExtension(SecurityAlertExtension::class)
+                    && class_exists(Package::class)
+                    && $vulnerability->PackageRecordID === 0
+                    && $packageRecord = Package::get()->find('Name', $package)
                 ) {
                     $vulnerability->PackageRecordID = $packageRecord->ID;
                 }
