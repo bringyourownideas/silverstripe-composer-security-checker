@@ -19,10 +19,9 @@
     ],
     "require": {
         "php": ">=5.6.0",
-        "silverstripe/framework": "^3.0",
-        "sensiolabs/security-checker": "^3.0",
-        "symbiote/silverstripe-queuedjobs": "^2.8",
-        "friendsofsilverstripe/silverstripe-maintenance": "^0.3"
+        "silverstripe/framework": "^3.2",
+        "sensiolabs/security-checker": "^4",
+        "symbiote/silverstripe-queuedjobs": "^2"
     },
     "extra": {
         "branch-alias": {
@@ -33,6 +32,7 @@
         "spekulatius/silverstripe-composer-security-checker": "self.version"
     },
     "suggest": {
+        "bringyourownideas/silverstripe-maintenance": "Display advisory information via Site Summary Report",
         "roave/security-advisories": "Raises a conflict on attempt to install a vulnerable module"
     },
     "support": {
