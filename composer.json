@@ -1,7 +1,7 @@
 {
     "name": "bringyourownideas/silverstripe-composer-security-checker",
     "description": "Provides information if your SilverStripe application uses dependencies with known vulnerabilities.",
-    "type": "silverstripe-module",
+    "type": "silverstripe-vendormodule",
     "license": "BSD-3-Clause",
     "keywords": [
         "silverstripe",
@@ -20,9 +20,8 @@
     "require": {
         "php": ">=5.6.0",
         "silverstripe/framework": "^4",
-        "sensiolabs/security-checker": "^3.0",
-        "symbiote/silverstripe-queuedjobs": "^3",
-        "friendsofsilverstripe/silverstripe-maintenance": "^2@dev"
+        "sensiolabs/security-checker": "^4",
+        "symbiote/silverstripe-queuedjobs": "^4"
     },
     "extra": {
         "branch-alias": {
@@ -33,6 +32,7 @@
         "spekulatius/silverstripe-composer-security-checker": "self.version"
     },
     "suggest": {
+        "bringyourownideas/silverstripe-maintenance": "Display advisory information via Site Summary Report",
         "roave/security-advisories": "Raises a conflict on attempt to install a vulnerable module"
     },
     "support": {

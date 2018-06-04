@@ -1,0 +1,7 @@
+en:
+  PackageSecurityExtension:
+    BADGE_SECURITY: 'RISK: Security'
+  SecurityAlertSummary:
+    TITLE: 'Security alert'
+    NOTICE_ONE: 'A notice has been issued for <strong>1</strong> of your modules. Review and updating is recommended.'
+    NOTICE_MANY: 'Notices have been issued for <strong>{count}</strong> of your modules. Review and updating is recommended.'
