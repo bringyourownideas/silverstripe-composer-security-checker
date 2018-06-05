@@ -26,7 +26,10 @@
     "extra": {
         "branch-alias": {
             "dev-master": "2.x-dev"
-        }
+        },
+        "expose": [
+            "client/dist"
+        ]
     },
     "replace": {
         "spekulatius/silverstripe-composer-security-checker": "self.version"

@@ -1,12 +1,24 @@
 <?php
 
+namespace BringYourOwnIdeas\SecurityChecker\Tasks;
+
 use SensioLabs\Security\SecurityChecker;
+use BringYourOwnIdeas\SecurityChecker\Models\SecurityAlert;
+use BringYourOwnIdeas\SecurityChecker\Extensions\SecurityAlertExtension;
+use BringYourOwnIdeas\Maintenance\Model\Package;
+use SilverStripe\ORM\Queries\SQLDelete;
+use SilverStripe\ORM\DataObjectSchema;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Control\Director;
+use SilverStripe\Dev\BuildTask;
 
 /**
  * Checks if there are any insecure dependencies.
  */
 class SecurityAlertCheckTask extends BuildTask
 {
+    private static $segment = 'SecurityAlertCheckTask';
+
     /**
      * @var SecurityChecker
      */
@@ -112,7 +124,8 @@ class SecurityAlertCheckTask extends BuildTask
         }
 
         // remove all entries which are resolved (no longer $validEntries)
-        $removeOldSecurityAlerts = SQLDelete::create('"SecurityAlert"');
+        $tableName = DataObjectSchema::create()->tableName(SecurityAlert::class);
+        $removeOldSecurityAlerts = SQLDelete::create("\"$tableName\"");
         if (empty($validEntries)) {
             // There were no SecurityAlerts listed for our installation - so flush any old data
             $removeOldSecurityAlerts->execute();
@@ -146,8 +159,6 @@ class SecurityAlertCheckTask extends BuildTask
      */
     protected function output($text)
     {
-        if (!SapphireTest::is_running_test()) {
-            echo Director::is_cli() ? $text . PHP_EOL : "<p>$text</p>\n";
-        }
+        echo Director::is_cli() ? $text . PHP_EOL : "<p>$text</p>\n";
     }
 }

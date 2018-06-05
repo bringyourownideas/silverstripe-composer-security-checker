@@ -1,5 +1,11 @@
 <?php
 
+namespace BringYourOwnIdeas\SecurityChecker\Tests;
+
+use BringYourOwnIdeas\SecurityChecker\Tasks\SecurityAlertCheckTask;
+use BringYourOwnIdeas\SecurityChecker\Jobs\SecurityAlertCheckJob;
+use SilverStripe\Dev\SapphireTest;
+
 class SecurityAlertCheckJobTest extends SapphireTest
 {
     public function testJobCallsTask()

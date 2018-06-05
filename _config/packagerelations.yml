@@ -2,14 +2,14 @@
 Name: packagerelations
 after: '#updatecheckerextensions'
 Only:
-  moduleexists: silverstripe-maintenance
+  moduleexists: bringyourownideas/silverstripe-maintenance
 ---
-Package:
+BringYourOwnIdeas\Maintenance\Model\Package:
   extensions:
-    - PackageSecurityExtension
-SecurityAlert:
+    - BringYourOwnIdeas\SecurityChecker\Extensions\PackageSecurityExtension
+BringYourOwnIdeas\SecurityChecker\Models\SecurityAlert:
   extensions:
-    - SecurityAlertExtension
-SiteSummary:
+    - BringYourOwnIdeas\SecurityChecker\Extensions\SecurityAlertExtension
+BringYourOwnIdeas\Maintenance\Reports\SiteSummary:
   extensions:
-    - SiteSummaryExtension
+    - BringYourOwnIdeas\SecurityChecker\Extensions\SiteSummaryExtension
