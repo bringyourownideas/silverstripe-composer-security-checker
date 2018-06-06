@@ -1,4 +1,11 @@
 <?php
+
+namespace BringYourOwnIdeas\SecurityChecker\Jobs;
+
+use BringYourOwnIdeas\SecurityChecker\Tasks\SecurityAlertCheckTask;
+use Symbiote\QueuedJobs\Services\QueuedJob;
+use Symbiote\QueuedJobs\Services\AbstractQueuedJob;
+
 /**
  * Composer security checker job. Runs the task which does the check as a queuedjob.
  *

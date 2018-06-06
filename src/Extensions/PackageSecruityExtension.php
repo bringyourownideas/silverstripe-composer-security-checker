@@ -1,9 +1,15 @@
 <?php
 
+namespace BringYourOwnIdeas\SecurityChecker\Extensions;
+
+use BringYourOwnIdeas\SecurityChecker\Models\SecurityAlert;
+use SilverStripe\View\ArrayData;
+use SilverStripe\ORM\DataExtension;
+
 class PackageSecurityExtension extends DataExtension
 {
     private static $has_many = [
-        'SecurityAlerts' => 'SecurityAlert'
+        'SecurityAlerts' => SecurityAlert::class
     ];
 
     private static $summary_fields = [

@@ -1,6 +1,14 @@
 <?php
 
+namespace BringYourOwnIdeas\SecurityChecker\Tests;
+
 use SensioLabs\Security\SecurityChecker;
+
+
+
+use BringYourOwnIdeas\SecurityChecker\Tasks\SecurityAlertCheckTask;
+use BringYourOwnIdeas\SecurityChecker\Models\SecurityAlert;
+use SilverStripe\Dev\SapphireTest;
 
 class SecurityAlertCheckTaskTest extends SapphireTest
 {
@@ -10,6 +18,20 @@ class SecurityAlertCheckTaskTest extends SapphireTest
      * @var SecurityAlertCheckTask
      */
     private $checkTask;
+
+    /**
+     * Run task buffering the output as so that it does not interfere with the test harness output.
+     *
+     * @param null|HTTPRequest $request
+     *
+     * @return string buffered output
+     */
+    private function runTask($request = null)
+    {
+        ob_start();
+        $this->checkTask->run($request);
+        return ob_get_clean();
+    }
 
     /**
      * provide a mock to remove dependency on external service
@@ -83,12 +105,10 @@ CVENOTICE;
 
     public function testUpdatesAreSaved()
     {
-        $checkTask = $this->checkTask;
-
         $preCheck = SecurityAlert::get();
         $this->assertCount(0, $preCheck, 'database is empty to begin with');
 
-        $checkTask->run(null);
+        $this->runTask();
 
         $postCheck = SecurityAlert::get();
         $this->assertCount(6, $postCheck, 'SecurityAlert has been stored');
@@ -96,14 +116,12 @@ CVENOTICE;
 
     public function testNoDuplicates()
     {
-        $checkTask = $this->checkTask;
-
-        $checkTask->run(null);
+        $this->runTask();
 
         $postCheck = SecurityAlert::get();
         $this->assertCount(6, $postCheck, 'SecurityAlert has been stored');
         
-        $checkTask->run(null);
+        $this->runTask();
 
         $postCheck = SecurityAlert::get();
         $this->assertCount(6, $postCheck, 'The SecurityAlert isn\'t stored twice.');
@@ -111,17 +129,15 @@ CVENOTICE;
 
     public function testSecurityAlertRemovals()
     {
-        $checkTask = $this->checkTask;
-
-        $checkTask->run(null);
+        $this->runTask();
 
         $preCheck = SecurityAlert::get();
         $this->assertCount(6, $preCheck, 'database has stored SecurityAlerts');
 
         $securityCheckerMock = $this->getSecurityCheckerMock(true);
-        $checkTask->setSecurityChecker($securityCheckerMock);
+        $this->checkTask->setSecurityChecker($securityCheckerMock);
 
-        $checkTask->run(null);
+        $this->runTask();
 
         $postCheck = SecurityAlert::get();
         $this->assertCount(0, $postCheck, 'database is empty to finish with');
@@ -129,8 +145,7 @@ CVENOTICE;
 
     public function testIdentifierSetsFromTitleIfCVEIsNotSet()
     {
-        $checkTask = $this->checkTask;
-        $checkTask->run(null);
+        $this->runTask();
         $frameworkAlert = SecurityAlert::get()
             ->filter('PackageName', 'silverstripe/framework')
             ->first();

@@ -1,0 +1,9 @@
+mappings:
+  PackageSecurityExtension: BringYourOwnIdeas\SecurityChecker\Extensions\PackageSecurityExtension
+  SecurityAlertExtension: BringYourOwnIdeas\SecurityChecker\Extensions\SecurityAlertExtension
+  SiteSummaryExtension: BringYourOwnIdeas\SecurityChecker\Extensions\SiteSummaryExtension
+  SecurityAlertCheckJob: BringYourOwnIdeas\SecurityChecker\Jobs\SecurityAlertCheckJob
+  SecurityAlert: BringYourOwnIdeas\SecurityChecker\Models\SecurityAlert
+  SecurityAlertCheckTask: BringYourOwnIdeas\SecurityChecker\Tasks\SecurityAlertCheckTask
+  SecurityAlertCheckJobTest: BringYourOwnIdeas\SecurityChecker\Tests\SecurityAlertCheckJobTest
+  SecurityAlertCheckTaskTest: BringYourOwnIdeas\SecurityChecker\Tests\SecurityAlertCheckTaskTest

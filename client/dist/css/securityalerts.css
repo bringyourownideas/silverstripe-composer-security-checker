@@ -1,3 +1,7 @@
+.site-alert__security-summary {
+  margin: 0;
+}
+
 .security-alerts__list {
   margin-top: 8px;
   display: none;
