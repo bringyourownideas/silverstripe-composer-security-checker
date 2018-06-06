@@ -15,7 +15,9 @@ class SiteSummaryExtension extends Extension
      */
     public function updateColumns(&$columns)
     {
-        Requirements::css('bringyourownideas/silverstripe-composer-security-checker: client/dist/css/securityalerts.css');
+        Requirements::css(
+            'bringyourownideas/silverstripe-composer-security-checker: client/dist/css/securityalerts.css'
+        );
         Requirements::javascript(
             'bringyourownideas/silverstripe-composer-security-checker: client/dist/javascript/summaryalerts.js'
         );
