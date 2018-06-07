@@ -1,0 +1,15 @@
+BringYourOwnIdeas\Maintenance\Model\Package:
+  package_a:
+    Name: package/a
+    Version: 1.2.3
+  package_b:
+    Name: package/b
+    Version: 2.4.0
+
+BringYourOwnIdeas\SecurityChecker\Models\SecurityAlert:
+  alert_a:
+    PackageName: package/a
+    Version: 1.2.3
+    ExternalLink: silverstripe.org
+    Identifier: SS-123-456
+    PackageRecord: =>BringYourOwnIdeas\Maintenance\Model\Package.package_a
