@@ -34,3 +34,7 @@ The information gets updated via a BuildTask, which in turn can be run via a que
 You will need to set up a scheduled process (e.g. `cron`) to run either the buildtask directly, or the task to process the queuedjobs queue in order to refresh the information.
 
 Use the information is stored in the `SecurityAlert` object, and can be consumed as needed. Please be careful how you expose this information. If the SilverStripe Maintenance module is present, a relationship will be connected between `Package` and `SecurityAlert`.
+
+## Documentation
+
+Please see the user guide section of the [SilverStripe Maintenance module](https://github.com/bringyourownideas/silverstripe-maintenance/tree/1/docs/en/userguide).
