@@ -1,6 +1,6 @@
 <p class="site-alert__security-summary">
     <strong><%t SecurityAlertSummary.TITLE "Security alert" %></strong><br />
-    <% if Count > 1 %>
+    <% if $Count > 1 %>
         <%t SecurityAlertSummary.NOTICE_MANY "Notices have been issued for <strong>{count}</strong> of your modules. Review and updating is recommended." count=$Count %>
     <% else %>
         <%t SecurityAlertSummary.NOTICE_ONE "A notice has been issued for <strong>{count}</strong> of your modules. Review and updating is recommended." count=$Count %>

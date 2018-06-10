@@ -3,8 +3,9 @@
 namespace BringYourOwnIdeas\SecurityChecker\Extensions;
 
 use BringYourOwnIdeas\SecurityChecker\Models\SecurityAlert;
-use SilverStripe\View\ArrayData;
+use SilverStripe\ORM\ArrayList;
 use SilverStripe\ORM\DataExtension;
+use SilverStripe\View\ArrayData;
 
 class PackageSecurityExtension extends DataExtension
 {
@@ -27,23 +28,12 @@ class PackageSecurityExtension extends DataExtension
     }
 
     /**
-     * Renders the SecurityAlerts relationship
-     * intended for use in the on screen version of the SiteSummary Report.
-     */
-    public function listAlerts()
-    {
-        $templates = ['PackageSecurityAlerts'];
-        $this->owner->extend('updateListAlerts', $templates);
-        return $this->owner->renderWith($templates);
-    }
-
-    /**
      * updates the badges that render as part of the screen targeted
      * summary for this Package
      *
      * @param ArrayList $badges
      */
-    public function updateBadges(&$badges)
+    public function updateBadges($badges)
     {
         if ($this->owner->SecurityAlerts()->exists()) {
             $badges->push(ArrayData::create([
@@ -54,13 +44,21 @@ class PackageSecurityExtension extends DataExtension
     }
 
     /**
-     * Appends our own summary info to that of the default output
-     * of the Package getSummary method.
+     * Adds security alert notifications into the schema
      *
-     * @param HTMLText $summary
+     * @param array &$schema
+     * @return string
      */
-    public function updateSummary(&$summary)
+    public function updateDataSchema(&$schema)
     {
-        $summary->setValue($summary . $this->listAlerts());
+        // The keys from the SecurityAlert model that we need in the React component
+        $keysToPass = ['Identifier', 'ExternalLink'];
+
+        $alerts = [];
+        foreach ($this->owner->SecurityAlerts()->toNestedArray() as $alert) {
+            $alerts[] = array_intersect_key($alert, array_flip($keysToPass));
+        }
+
+        $schema['securityAlerts'] = $alerts;
     }
 }
