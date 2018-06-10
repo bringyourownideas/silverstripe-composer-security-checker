@@ -1,0 +1,25 @@
+Package:
+  noalerts:
+    Name: venderr/noalert
+    Type: silverstripe-module
+  analert:
+    Name: venderr/analert
+    Type: silverstripe-vendormodule
+  otheralerts:
+    Name: venderr/otheralerts
+    Type: silverstripe-module
+SecurityAlert:
+  one:
+    ID: 1
+    Title: 'an alert'
+    PackageRecord: '=>Package.analert'
+  two:
+    ID: 2
+    Title: 'another alert'
+    Identifier: ABC-001
+    PackageRecord: '=>Package.otheralerts'
+  three:
+    ID: 4
+    Title: 'other alert'
+    Identifier: SPY-007
+    PackageRecord: '=>Package.otheralerts'
