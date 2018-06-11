@@ -1,33 +1,42 @@
 <?php
 
+namespace BringYourOwnIdeas\SecurityChecker\Tests\Extensions;
+
+use BringYourOwnIdeas\Maintenance\Model\Package;
+use BringYourOwnIdeas\Maintenance\Reports\SiteSummary;
 use BringYourOwnIdeas\SecurityChecker\Tests\Stubs\SiteSummaryAlertStub;
+use SilverStripe\Core\Config\Config;
+use SilverStripe\Core\Injector\Injector;
+use SilverStripe\Dev\SapphireTest;
+use SilverStripe\Forms\LiteralField;
+use SilverStripe\View\SSViewer;
+use Symbiote\QueuedJobs\Services\QueuedJobService;
 
 class SiteSummaryExtensionTest extends SapphireTest
 {
-    protected static $fixture_file = 'PackagesWithAlerts.yml';
+    protected static $fixture_file = 'PackageSecurityExtensionTest.yml';
 
-    protected $requiredExtensions = [
+    protected static $required_extensions = [
         SiteSummary::class => [SiteSummaryAlertStub::class]
     ];
 
-    public function setUpOnce()
+    protected function setUp()
     {
         if (!class_exists(Package::class)) {
-            $this->requiredExtensions = [];
-        }
-        parent::setUpOnce();
-    }
+            static::$fixture_file = null;
+            static::$required_extensions = [];
 
-    public function setUp()
-    {
-        if (!class_exists(Package::class)) {
             $this->markTestSkipped(
                 'Module bringyourownideas/silverstripe-maintenance is required for this test, but is not present.'
             );
         }
+
+        QueuedJobService::config()->set('use_shutdown_function', false);
+
         // The themes should not affect test results.
         // Ensure we use the default templates supplied with this module.
-        Config::inst()->update(SSViewer::class, 'theme_enabled', false);
+        Config::modify()->set(SSViewer::class, 'theme_enabled', false);
+
         parent::setUp();
     }
 
@@ -42,10 +51,14 @@ class SiteSummaryExtensionTest extends SapphireTest
 
     public function testUpdateAlerts()
     {
+        /** @var SiteSummary $report */
         $report = Injector::inst()->create(SiteSummary::class);
         $fields = $report->getCMSFields();
+
+        /** @var LiteralField $alertSummary */
         $alertSummary = $fields->fieldByName('AlertSummary');
         $this->assertInstanceOf(LiteralField::class, $alertSummary);
+
         $content = $alertSummary->getContent();
         $this->assertContains(
             'Sound the alarm!',

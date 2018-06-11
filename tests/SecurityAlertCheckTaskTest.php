@@ -2,13 +2,13 @@
 
 namespace BringYourOwnIdeas\SecurityChecker\Tests;
 
-use SensioLabs\Security\SecurityChecker;
-
-
-
-use BringYourOwnIdeas\SecurityChecker\Tasks\SecurityAlertCheckTask;
 use BringYourOwnIdeas\SecurityChecker\Models\SecurityAlert;
+use BringYourOwnIdeas\SecurityChecker\Tasks\SecurityAlertCheckTask;
+use SensioLabs\Security\SecurityChecker;
+use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Dev\SapphireTest;
+use Symbiote\QueuedJobs\Services\QueuedJobService;
+
 
 class SecurityAlertCheckTaskTest extends SapphireTest
 {
@@ -18,6 +18,18 @@ class SecurityAlertCheckTaskTest extends SapphireTest
      * @var SecurityAlertCheckTask
      */
     private $checkTask;
+
+    protected function setUp()
+    {
+        parent::setUp();
+
+        QueuedJobService::config()->set('use_shutdown_function', false);
+
+        $securityCheckerMock = $this->getSecurityCheckerMock();
+        $checkTask = new SecurityAlertCheckTask;
+        $checkTask->setSecurityChecker($securityCheckerMock);
+        $this->checkTask = $checkTask;
+    }
 
     /**
      * Run task buffering the output as so that it does not interfere with the test harness output.
@@ -94,15 +106,6 @@ CVENOTICE;
         return $securityCheckerMock;
     }
 
-    public function setUp()
-    {
-        parent::setUp();
-        $securityCheckerMock = $this->getSecurityCheckerMock();
-        $checkTask = new SecurityAlertCheckTask;
-        $checkTask->setSecurityChecker($securityCheckerMock);
-        $this->checkTask = $checkTask;
-    }
-
     public function testUpdatesAreSaved()
     {
         $preCheck = SecurityAlert::get();
@@ -120,7 +123,7 @@ CVENOTICE;
 
         $postCheck = SecurityAlert::get();
         $this->assertCount(6, $postCheck, 'SecurityAlert has been stored');
-        
+
         $this->runTask();
 
         $postCheck = SecurityAlert::get();

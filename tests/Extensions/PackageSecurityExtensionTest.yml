@@ -5,6 +5,15 @@ BringYourOwnIdeas\Maintenance\Model\Package:
   package_b:
     Name: package/b
     Version: 2.4.0
+  noalerts:
+    Name: venderr/noalert
+    Type: silverstripe-module
+  analert:
+    Name: venderr/analert
+    Type: silverstripe-vendormodule
+  otheralerts:
+    Name: venderr/otheralerts
+    Type: silverstripe-module
 
 BringYourOwnIdeas\SecurityChecker\Models\SecurityAlert:
   alert_a:
@@ -13,3 +22,14 @@ BringYourOwnIdeas\SecurityChecker\Models\SecurityAlert:
     ExternalLink: silverstripe.org
     Identifier: SS-123-456
     PackageRecord: =>BringYourOwnIdeas\Maintenance\Model\Package.package_a
+  one:
+    Title: 'an alert'
+    PackageRecord: =>BringYourOwnIdeas\Maintenance\Model\Package.analert
+  two:
+    Title: 'another alert'
+    Identifier: ABC-001
+    PackageRecord: =>BringYourOwnIdeas\Maintenance\Model\Package.otheralerts
+  three:
+    Title: 'other alert'
+    Identifier: SPY-007
+    PackageRecord: =>BringYourOwnIdeas\Maintenance\Model\Package.otheralerts

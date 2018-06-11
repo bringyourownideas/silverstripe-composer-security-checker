@@ -2,8 +2,8 @@
 
 namespace BringYourOwnIdeas\SecurityChecker\Tests\Stubs;
 
-use Extension;
-use TestOnly;
+use SilverStripe\Core\Extension;
+use SilverStripe\Dev\TestOnly;
 
 class SiteSummaryAlertStub extends Extension implements TestOnly
 {
