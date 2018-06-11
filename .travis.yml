@@ -17,16 +17,17 @@ matrix:
     - php: 5.6
       env: DB=MYSQL CORE_RELEASE=3.5
     - php: 5.6
-      env: DB=MYSQL CORE_RELEASE=3.6
+      env: DB=MYSQL CORE_RELEASE=3.6 MAINTENANCE=^1
     - php: 7.0
       env: DB=MYSQL CORE_RELEASE=3.6
     - php: 7.1
-      env: DB=MYSQL CORE_RELEASE=3.6
+      env: DB=MYSQL CORE_RELEASE=3.6 MAINTENANCE=1.0.x-dev
 
 before_script:
   - composer self-update || true
   - composer clear-cache
   - composer validate --strict
+  - if [[ $MAINTENANCE ]]; then composer require --no-update bringyourownideas/silverstripe-maintenance $MAINTENANCE; fi
   - git clone git://github.com/silverstripe-labs/silverstripe-travis-support.git ~/travis-support
   - php ~/travis-support/travis_setup.php --source `pwd` --target ~/builds/ss
   - cd ~/builds/ss
