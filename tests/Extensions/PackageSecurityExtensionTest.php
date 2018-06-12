@@ -14,11 +14,11 @@ class PackageSecurityExtensionTest extends SapphireTest
     {
         if (!class_exists(Package::class)) {
             static::$fixture_file = null;
+            parent::setUp();
             $this->markTestSkipped('This test class requires the maintenance module to be installed');
         }
 
         QueuedJobService::config()->set('use_shutdown_function', false);
-
         parent::setUp();
     }
 

@@ -20,12 +20,19 @@ class SiteSummaryExtensionTest extends SapphireTest
         SiteSummary::class => [SiteSummaryAlertStub::class]
     ];
 
+    public static function setUpBeforeClass()
+    {
+        if (!class_exists(Package::class)) {
+            static::$required_extensions = [];
+        }
+        return parent::setUpBeforeClass();
+    }
+
     protected function setUp()
     {
         if (!class_exists(Package::class)) {
             static::$fixture_file = null;
-            static::$required_extensions = [];
-
+            parent::setUp();
             $this->markTestSkipped(
                 'Module bringyourownideas/silverstripe-maintenance is required for this test, but is not present.'
             );

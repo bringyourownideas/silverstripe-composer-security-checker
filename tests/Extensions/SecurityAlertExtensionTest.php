@@ -15,13 +15,13 @@ class SecurityAlertExtensionTest extends SapphireTest
     {
         if (!class_exists(Package::class)) {
             static::$fixture_file = null;
+            parent::setUp();
             $this->markTestSkipped(
                 'Module bringyourownideas/silverstripe-maintenance is required for this test, but is not present.'
             );
         }
 
         QueuedJobService::config()->set('use_shutdown_function', false);
-
         parent::setUp();
     }
 
