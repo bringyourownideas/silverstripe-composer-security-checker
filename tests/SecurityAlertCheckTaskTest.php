@@ -9,7 +9,6 @@ use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Dev\SapphireTest;
 use Symbiote\QueuedJobs\Services\QueuedJobService;
 
-
 class SecurityAlertCheckTaskTest extends SapphireTest
 {
     protected $usesDatabase = true;
