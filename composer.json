@@ -30,9 +30,6 @@
     "prefer-stable": true,
     "minimum-stability": "dev",
     "extra": {
-        "branch-alias": {
-            "dev-master": "2.x-dev"
-        },
         "expose": [
             "client/dist"
         ]
