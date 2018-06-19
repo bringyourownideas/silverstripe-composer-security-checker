@@ -13,7 +13,7 @@ class SecurityAlertCheckTask extends BuildTask
     protected $securityChecker;
 
     private static $dependencies = [
-        'SecurityChecker' => '%$' . SecurityChecker::class,
+        'SecurityChecker' => '%$SensioLabs\\Security\\SecurityChecker',
     ];
 
     protected $title = 'Composer security checker';
