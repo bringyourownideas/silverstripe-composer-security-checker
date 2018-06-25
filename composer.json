@@ -23,11 +23,7 @@
         "sensiolabs/security-checker": "^4",
         "symbiote/silverstripe-queuedjobs": "^3"
     },
-    "extra": {
-        "branch-alias": {
-            "1.x-dev": "1.0.x-dev"
-        }
-    },
+    "extra": [],
     "replace": {
         "spekulatius/silverstripe-composer-security-checker": "self.version"
     },
