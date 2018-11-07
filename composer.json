@@ -20,7 +20,7 @@
     "require": {
         "php": ">=5.6.0",
         "silverstripe/framework": "^4",
-        "sensiolabs/security-checker": "^4",
+        "sensiolabs/security-checker": "^5",
         "symbiote/silverstripe-queuedjobs": "^4"
     },
     "require-dev": {
