@@ -41,7 +41,9 @@ class PackageSecurityExtensionTest extends SapphireTest
         /** @var Package $package */
         $package = $this->objFromFixture(Package::class, 'otheralerts');
 
-        $this->assertEquals('ABC-001, SPY-007', $package->listSecurityAlertIdentifiers());
+        $identifiers = $package->listSecurityAlertIdentifiers();
+        $this->assertContains('ABC-001', $identifiers);
+        $this->assertContains('SPY-007', $identifiers);
     }
 
     public function testGetBadgesHook()
