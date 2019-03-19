@@ -1,5 +1,6 @@
 <?php
 
+use SensioLabs\Security\Result;
 use SensioLabs\Security\SecurityChecker;
 
 class SecurityAlertCheckTaskTest extends SapphireTest
@@ -66,7 +67,7 @@ CVENOTICE;
 
         $securityCheckerMock = $this->getMockBuilder(SecurityChecker::class)->setMethods(['check'])->getMock();
         $securityCheckerMock->expects($this->any())->method('check')->will($this->returnValue(
-            $empty ? [] : json_decode($mockOutput, true)
+            $empty ? new Result(0, '{}', 'json') : new Result(6, $mockOutput, 'json')
         ));
 
         return $securityCheckerMock;
@@ -102,7 +103,7 @@ CVENOTICE;
 
         $postCheck = SecurityAlert::get();
         $this->assertCount(6, $postCheck, 'SecurityAlert has been stored');
-        
+
         $checkTask->run(null);
 
         $postCheck = SecurityAlert::get();

@@ -67,22 +67,25 @@ class SecurityAlertCheckTask extends BuildTask
 
         // use the security checker of
         $checker = $this->getSecurityChecker();
-        $alerts = $checker->check(BASE_PATH . DIRECTORY_SEPARATOR . 'composer.lock');
+        $result = $checker->check(BASE_PATH . DIRECTORY_SEPARATOR . 'composer.lock');
+        $alerts = json_decode((string) $result, true);
 
         // go through all alerts for packages - each can contain multiple issues
         foreach ($alerts as $package => $packageDetails) {
             // go through each individual known security issue
             foreach ($packageDetails['advisories'] as $details) {
                 $identifier = $this->discernIdentifier($details['cve'], $details['title']);
+                $vulnerability = null;
+
                 // check if this vulnerability is already known
-                $vulnerability = SecurityAlert::get()->filter(array(
+                $existingVulns = SecurityAlert::get()->filter(array(
                     'PackageName' => $package,
                     'Version' => $packageDetails['version'],
                     'Identifier'   => $identifier,
                 ));
 
                 // Is this vulnerability known? No, lets add it.
-                if ((int) $vulnerability->count() === 0) {
+                if (!$existingVulns->Count()) {
                     $vulnerability = SecurityAlert::create();
                     $vulnerability->PackageName  = $package;
                     $vulnerability->Version      = $packageDetails['version'];
@@ -96,17 +99,18 @@ class SecurityAlertCheckTask extends BuildTask
                     $validEntries[] = $vulnerability->ID;
                 } else {
                     // add existing vulnerabilities (probably just 1) to the list of valid entries
-                    $validEntries = array_merge($validEntries, $vulnerability->column('ID'));
+                    $validEntries = array_merge($validEntries, $existingVulns->column('ID'));
                 }
 
                 // Relate this vulnerability to an existing Package, if the
                 // bringyourownideas/silverstripe-maintenance module is installed
-                if ($vulnerability->hasExtension(SecurityAlertExtension::class)
+                if ($vulnerability && $vulnerability->hasExtension(SecurityAlertExtension::class)
                     && class_exists(Package::class)
-                    && $vulnerability->PackageRecordID === 0
+                    && !$vulnerability->PackageRecordID
                     && $packageRecord = Package::get()->find('Name', $package)
                 ) {
                     $vulnerability->PackageRecordID = $packageRecord->ID;
+                    $vulnerability->write();
                 }
             }
         }
