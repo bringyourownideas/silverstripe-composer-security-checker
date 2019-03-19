@@ -2,6 +2,10 @@
   margin: 0;
 }
 
+.package-summary__security-alerts ul {
+  margin-bottom: 0;
+}
+
 .security-alerts__list {
   margin-top: 8px;
   display: none;
