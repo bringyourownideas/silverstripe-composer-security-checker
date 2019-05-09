@@ -4,6 +4,7 @@ namespace BringYourOwnIdeas\SecurityChecker\Tests;
 
 use BringYourOwnIdeas\SecurityChecker\Models\SecurityAlert;
 use BringYourOwnIdeas\SecurityChecker\Tasks\SecurityAlertCheckTask;
+use SensioLabs\Security\Result;
 use SensioLabs\Security\SecurityChecker;
 use SilverStripe\Control\HTTPRequest;
 use SilverStripe\Dev\SapphireTest;
@@ -99,7 +100,7 @@ CVENOTICE;
 
         $securityCheckerMock = $this->getMockBuilder(SecurityChecker::class)->setMethods(['check'])->getMock();
         $securityCheckerMock->expects($this->any())->method('check')->will($this->returnValue(
-            $empty ? [] : json_decode($mockOutput, true)
+            $empty ? new Result(0, '{}', 'json') : new Result(6, $mockOutput, 'json')
         ));
 
         return $securityCheckerMock;

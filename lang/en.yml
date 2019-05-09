@@ -1,7 +1,15 @@
 en:
   BringYourOwnIdeas\SecurityChecker\Extensions\PackageSecurityExtension:
     BADGE_SECURITY: 'RISK: Security'
+  BringYourOwnIdeas\SecurityChecker\Jobs\SecurityAlertCheckJob:
+    Title: 'Check if any composer managed modules have known security vulnerabilities.'
+  BringYourOwnIdeas\SecurityChecker\Models\SecurityAlert:
+    PLURALNAME: 'Security Alerts'
+    PLURALS:
+      one: 'A Security Alert'
+      other: '{count} Security Alerts'
+    SINGULARNAME: 'Security Alert'
   SecurityAlertSummary:
-    TITLE: 'Security alert'
-    NOTICE_ONE: 'A notice has been issued for <strong>1</strong> of your modules. Review and updating is recommended.'
     NOTICE_MANY: 'Notices have been issued for <strong>{count}</strong> of your modules. Review and updating is recommended.'
+    NOTICE_ONE: 'A notice has been issued for <strong>{count}</strong> of your modules. Review and updating is recommended.'
+    TITLE: 'Security alert'
