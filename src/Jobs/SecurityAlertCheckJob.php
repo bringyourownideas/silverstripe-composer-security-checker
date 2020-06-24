@@ -15,7 +15,7 @@ use Symbiote\QueuedJobs\Services\AbstractQueuedJob;
 class SecurityAlertCheckJob extends AbstractQueuedJob implements QueuedJob
 {
     private static $dependencies = [
-        'SecurityAlertCheckTask' => '%$' . SecurityAlertCheckTask::class,
+        'checkTask' => '%$' . SecurityAlertCheckTask::class,
     ];
 
     /**
