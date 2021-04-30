@@ -1,5 +1,7 @@
 # SilverStripe Security Checker
 
+**WARNING**: As of January 2021, this module no longer works because the underlying service has been shut down (see [announcement](https://github.com/sensiolabs/security-checker) and [discussion](https://github.com/bringyourownideas/silverstripe-composer-security-checker/issues/57))
+
 [![Build Status](https://api.travis-ci.org/bringyourownideas/silverstripe-composer-security-checker.svg?branch=master)](https://travis-ci.org/bringyourownideas/silverstripe-composer-security-checker)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bringyourownideas/silverstripe-composer-security-checker/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bringyourownideas/silverstripe-composer-security-checker/?branch=master)
 [![codecov](https://codecov.io/gh/bringyourownideas/silverstripe-composer-security-checker/branch/master/graph/badge.svg)](https://codecov.io/gh/bringyourownideas/silverstripe-composer-security-checker)
