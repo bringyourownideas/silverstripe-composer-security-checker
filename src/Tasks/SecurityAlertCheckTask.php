@@ -2,14 +2,14 @@
 
 namespace BringYourOwnIdeas\SecurityChecker\Tasks;
 
-use SensioLabs\Security\SecurityChecker;
+use Signify\SecurityChecker\SecurityChecker;
 use BringYourOwnIdeas\SecurityChecker\Models\SecurityAlert;
 use BringYourOwnIdeas\SecurityChecker\Extensions\SecurityAlertExtension;
 use BringYourOwnIdeas\Maintenance\Model\Package;
 use SilverStripe\ORM\Queries\SQLDelete;
 use SilverStripe\ORM\DataObjectSchema;
-use SilverStripe\Dev\SapphireTest;
 use SilverStripe\Control\Director;
+use SilverStripe\Core\Injector\Injector;
 use SilverStripe\Dev\BuildTask;
 
 /**
@@ -24,10 +24,6 @@ class SecurityAlertCheckTask extends BuildTask
      */
     protected $securityChecker;
 
-    private static $dependencies = [
-        'SecurityChecker' => '%$' . SecurityChecker::class,
-    ];
-
     protected $title = 'Composer security checker';
 
     protected $description =
@@ -38,6 +34,9 @@ class SecurityAlertCheckTask extends BuildTask
      */
     public function getSecurityChecker()
     {
+        if (!$this->securityChecker) {
+            $this->securityChecker = Injector::inst()->get(SecurityChecker::class);
+        }
         return $this->securityChecker;
     }
 
@@ -77,10 +76,9 @@ class SecurityAlertCheckTask extends BuildTask
         // to keep the list up to date while removing resolved issues we keep all of found issues
         $validEntries = array();
 
-        // use the security checker of
+        // check for vulnerabilities
         $checker = $this->getSecurityChecker();
-        $result = $checker->check(BASE_PATH . DIRECTORY_SEPARATOR . 'composer.lock');
-        $alerts = json_decode((string) $result, true);
+        $alerts = $checker->check(BASE_PATH . DIRECTORY_SEPARATOR . 'composer.lock');
 
         // go through all alerts for packages - each can contain multiple issues
         foreach ($alerts as $package => $packageDetails) {

@@ -1,14 +1,12 @@
 # SilverStripe Security Checker
 
-**WARNING**: As of January 2021, this module no longer works because the underlying service has been shut down (see [announcement](https://github.com/sensiolabs/security-checker) and [discussion](https://github.com/bringyourownideas/silverstripe-composer-security-checker/issues/57))
-
 [![Build Status](https://api.travis-ci.org/bringyourownideas/silverstripe-composer-security-checker.svg?branch=master)](https://travis-ci.org/bringyourownideas/silverstripe-composer-security-checker)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/bringyourownideas/silverstripe-composer-security-checker/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/bringyourownideas/silverstripe-composer-security-checker/?branch=master)
 [![codecov](https://codecov.io/gh/bringyourownideas/silverstripe-composer-security-checker/branch/master/graph/badge.svg)](https://codecov.io/gh/bringyourownideas/silverstripe-composer-security-checker)
 [![SilverStripe supported module](https://img.shields.io/badge/silverstripe-supported-0071C4.svg)](https://www.silverstripe.org/software/addons/silverstripe-commercially-supported-module-list/)
 
-Adds a task which runs a check if any of the dependencies has known security vulnerabilities. It uses the
-[SensioLabs Security Check Web service](http://security.sensiolabs.org/) and the [Security Advisories Database](https://github.com/FriendsOfPHP/security-advisories).
+Adds a task which runs a check if any of the dependencies has known security vulnerabilities. It uses
+[Signify's Composer Security Checker](https://github.com/signify-nz/composer-security-checker) which checks against the [Security Advisories Database](https://github.com/FriendsOfPHP/security-advisories).
 
 BSD 3-clause [License](https://github.com/bringyourownideas/silverstripe-composer-security-checker/blob/master/license.md)
 
